@@ -1,20 +1,19 @@
 package org.palladiosimulator.measurementspec;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 
-import org.palladiosimulator.edp2.models.ExperimentData.BaseMetricDescription;
-import org.palladiosimulator.edp2.models.ExperimentData.Identifier;
-import org.palladiosimulator.edp2.models.ExperimentData.MetricDescription;
-import org.palladiosimulator.edp2.models.ExperimentData.NumericalBaseMetricDescription;
-import org.palladiosimulator.measurementspec.requestcontext.RequestContext;
+import org.palladiosimulator.metricspec.BaseMetricDescription;
+import org.palladiosimulator.metricspec.Identifier;
+import org.palladiosimulator.metricspec.MetricDescription;
+import org.palladiosimulator.metricspec.NumericalBaseMetricDescription;
 
 /**
- * Represents a sample which is taken for a probe.
- * <p>
- * Use this class to store any type of probe sample. Therefore the class parameters V and Q have to
- * be specified which represents the sample type.
- * 
+ * Represents a basic measurement, i.e., a measurement for a {@see BaseMetricDescription}
+ *
  * @param <V>
  *            denotes the class of the taken sample (Integer, Long, ...)
  * @param <Q>
@@ -27,23 +26,8 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
     /** the measured value and its quantity. */
     private final Measure<V, Q> measure;
 
-    /**
-     * Class constructor specifying the measured value, the id and type of the probe.
-     * 
-     * @param measure
-     *            the measured value in conjunction with its {@link Quantity}
-     * @param measuredProbe
-     * @param modelElementID
-     * @param probeID
-     *            the id of the probe
-     * @param probeType
-     *            the type of the probe
-     * @see Measure
-     * @see ProbeType
-     */
-    public BasicMeasurement(final Measure<V, Q> measure, final MetricDescription metricDescription,
-            final MeasurementSource measurementSource, final RequestContext requestContext, final String modelElementID) {
-        super(requestContext, metricDescription, measurementSource, modelElementID);
+    public BasicMeasurement(final Measure<V, Q> measure, final MetricDescription metricDescription) {
+        super(metricDescription);
         if (!(metricDescription instanceof BaseMetricDescription)) {
             throw new IllegalArgumentException("A basic measurement must have a base metric description");
         }
@@ -98,9 +82,16 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
 
     @Override
     public BasicMeasurement<V, Q> getMeasurementForMetric(final MetricDescription metricDesciption) {
-        if (!metricDesciption.getUuid().equals(this.metricDesciption.getUuid())) {
+        if (!metricDesciption.getId().equals(this.metricDesciption.getId())) {
             return null;
         }
         return this;
+    }
+
+    @Override
+    public List<Measure<?, ?>> asList() {
+        final ArrayList<Measure<?,?>> result = new ArrayList<Measure<?,?>>(1);
+        result.add(this.measure);
+        return result;
     }
 }

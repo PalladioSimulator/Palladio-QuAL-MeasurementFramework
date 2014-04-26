@@ -1,12 +1,14 @@
 package org.palladiosimulator.measurementspec;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.palladiosimulator.edp2.models.ExperimentData.MetricDescription;
-import org.palladiosimulator.edp2.models.ExperimentData.MetricSetDescription;
-import org.palladiosimulator.measurementspec.requestcontext.RequestContext;
+import javax.measure.Measure;
+
+import org.palladiosimulator.metricspec.MetricDescription;
+import org.palladiosimulator.metricspec.MetricSetDescription;
 
 /**
  * Represents a sample which is taken for a ProbeSet in a {@link RequestContext}
@@ -26,9 +28,9 @@ import org.palladiosimulator.measurementspec.requestcontext.RequestContext;
  * @author Faber
  * @author Sebastian Lehrig
  */
-public final class MeasurementSet extends Measurement {
+public final class MeasurementTupple extends Measurement {
 
-    private final List<Measurement> subsumedMeasurements = new LinkedList<Measurement>();
+    private final List<Measurement> subsumedMeasurements;
 
     /**
      * Class constructor specifying the encapsulated probe samples, the context
@@ -47,14 +49,27 @@ public final class MeasurementSet extends Measurement {
      *            the id of the probe set according to the underlying model
      * @see RequestContext
      */
-    public MeasurementSet(
-            final List<Measurement> subsumedMeasurements, final MetricSetDescription metrics, final MeasurementSource measurementSource) {
-        super(
-                getRequestContext(subsumedMeasurements),
-                metrics,
-                measurementSource,
-                getModelElementID(subsumedMeasurements));
-        this.subsumedMeasurements.addAll(subsumedMeasurements);
+    public MeasurementTupple(
+            final List<Measurement> subsumedMeasurements, final MetricSetDescription metrics) {
+        super(metrics);
+        this.subsumedMeasurements = Collections.unmodifiableList(subsumedMeasurements);
+        checkValidParameters();
+    }
+
+    public MeasurementTupple(
+            final MetricSetDescription metric, final Measure ... measures) {
+        this(metric, Arrays.asList(measures));
+    }
+
+    public MeasurementTupple(
+            final MetricSetDescription metric, final List<Measure> measures) {
+        super(metric);
+        final ArrayList<Measurement> measurements = new ArrayList<Measurement>();
+        int i = 0;
+        for (final Measure measure : measures) {
+            measurements.add(new BasicMeasurement(measure,metric.getSubsumedMetrics().get(i++)));
+        }
+        this.subsumedMeasurements = Collections.unmodifiableList(measurements);
         checkValidParameters();
     }
 
@@ -75,39 +90,12 @@ public final class MeasurementSet extends Measurement {
      * @see BasicMeasurement
      */
     public final List<Measurement> getSubsumedMeasurements () {
-        return Collections.unmodifiableList(this.subsumedMeasurements);
-    }
-
-    private static RequestContext getRequestContext(final List<Measurement> subsumedMeasurements) {
-        if (subsumedMeasurements == null || subsumedMeasurements.size() == 0) {
-            throw new IllegalArgumentException("Illegal measurements provided");
-        }
-        if (subsumedMeasurements.contains(null)) {
-            throw new IllegalArgumentException("Measurements are not allowed to include null values as subsumed measurements");
-        }
-
-        final RequestContext result = subsumedMeasurements.get(0).getRequestContext();
-        for (final Measurement childMeasurment : subsumedMeasurements) {
-            if (childMeasurment.getRequestContext() != result) {
-                throw new RuntimeException("All measurments have to be taken in the same context");
-            }
-        }
-        return result;
-    }
-
-    private static String getModelElementID(final List<Measurement> subsumedMeasurements) {
-        final String result = subsumedMeasurements.get(0).getModelElementID();
-        for (final Measurement childMeasurment : subsumedMeasurements) {
-            if (childMeasurment.getModelElementID() != result) {
-                throw new RuntimeException("All measurments have to be taken from the same model element");
-            }
-        }
-        return result;
+        return this.subsumedMeasurements;
     }
 
     @Override
     public Measurement getMeasurementForMetric(final MetricDescription wantedMetric) {
-        if (this.getMetricDesciption().getUuid().equals(wantedMetric.getUuid())) {
+        if (this.getMetricDesciption().getId().equals(wantedMetric.getId())) {
             return this;
         }
 
@@ -118,5 +106,28 @@ public final class MeasurementSet extends Measurement {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Measure<?,?>> asList() {
+        final ArrayList<Measure<?,?>> result = new ArrayList<Measure<?,?>>();
+        for (final Measurement m : subsumedMeasurements) {
+            result.addAll(m.asList());
+        }
+        return result;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("DataTuple [");
+        for (final Measure<?,?> m : asList()) {
+            sb.append(m.toString() + " ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }

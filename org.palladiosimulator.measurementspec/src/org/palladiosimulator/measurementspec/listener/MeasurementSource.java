@@ -1,10 +1,11 @@
-package org.palladiosimulator.measurementspec;
+package org.palladiosimulator.measurementspec.listener;
 
 import java.util.Collection;
 
 import org.palladiosimulator.commons.designpatterns.AbstractObservable;
-import org.palladiosimulator.edp2.metricentity.MetricEntity;
-import org.palladiosimulator.edp2.models.ExperimentData.MetricDescription;
+import org.palladiosimulator.measurementspec.Measurement;
+import org.palladiosimulator.metricspec.MetricDescription;
+import org.palladiosimulator.metricspec.metricentity.MetricEntity;
 
 /**
  * 
@@ -17,7 +18,7 @@ public abstract class MeasurementSource extends MetricEntity implements IMeasure
     public MeasurementSource(final MetricDescription metricDesciption) {
         super(metricDesciption);
     }
-    
+
     /**
      * @param observer
      * @see org.palladiosimulator.commons.designpatterns.IAbstractObservable#addObserver(java.lang.Object)
@@ -36,7 +37,7 @@ public abstract class MeasurementSource extends MetricEntity implements IMeasure
         observableDelegate.removeObserver(observer);
     }
 
-    
+
     public boolean isCompatibleMeasurement(final Measurement measurement) {
         if (!isCompatibleWith(measurement.getMetricDesciption())) {
             return false;
@@ -45,13 +46,13 @@ public abstract class MeasurementSource extends MetricEntity implements IMeasure
     }
 
     /**
-     * @param measurement
+     * @param newMeasurement
      */
-    protected void notifyMeasurementSourceListener(final Measurement measurement) {
-        if (!isCompatibleMeasurement(measurement)) {
+    protected void notifyMeasurementSourceListener(final Measurement newMeasurement) {
+        if (!isCompatibleMeasurement(newMeasurement)) {
             throw new IllegalArgumentException("Taken measurement has an incompatible metric");
         }
-        observableDelegate.getEventDispatcher().newMeasurementAvailable(measurement);
+        observableDelegate.getEventDispatcher().newMeasurementAvailable(newMeasurement);
     }
 
     protected Collection<IMeasurementSourceListener> getMeasurementSourceListeners() {

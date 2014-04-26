@@ -1,52 +1,23 @@
 package org.palladiosimulator.measurementspec;
 
+import java.util.List;
+
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 
-import org.palladiosimulator.edp2.metricentity.MetricEntity;
-import org.palladiosimulator.edp2.models.ExperimentData.BaseMetricDescription;
-import org.palladiosimulator.edp2.models.ExperimentData.MetricDescription;
-import org.palladiosimulator.measurementspec.requestcontext.MeasurementSourceAndRequestContext;
-import org.palladiosimulator.measurementspec.requestcontext.RequestContext;
+import org.palladiosimulator.metricspec.BaseMetricDescription;
+import org.palladiosimulator.metricspec.MetricDescription;
+import org.palladiosimulator.metricspec.metricentity.MetricEntity;
 
 public abstract class Measurement extends MetricEntity {
-
-    private final MeasurementSourceAndRequestContext measurementSourceAndRequestContext;
-
-    /** The id of the annotated model element */
-    private final String modelElementID;
-
 
     /**
      * @param measuredMetric
      * @param measuredProbe
      * @param modelElementID
      */
-    protected Measurement(final RequestContext requestContext, final MetricDescription measuredMetric, final MeasurementSource measurementSource, final String modelElementID) {
+    protected Measurement(final MetricDescription measuredMetric) {
         super(measuredMetric);
-        this.measurementSourceAndRequestContext = new MeasurementSourceAndRequestContext(measurementSource, requestContext);
-        this.modelElementID = modelElementID;
-    }
-
-    /**
-     * @return the measuredProbe
-     */
-    public final MetricEntity getMeasurementSource() {
-        return measurementSourceAndRequestContext.getMeasurementSource();
-    }
-
-    /**
-     * Returns the id of the model element which is annotated by the underlying
-     * probe set.
-     * 
-     * @return the model element id
-     */
-    public final String getModelElementID() {
-        return modelElementID;
-    }
-
-    public RequestContext getRequestContext() {
-        return this.measurementSourceAndRequestContext.getRequestContext();
     }
 
     @SuppressWarnings("unchecked")
@@ -63,5 +34,16 @@ public abstract class Measurement extends MetricEntity {
     }
 
     public abstract Measurement getMeasurementForMetric(final MetricDescription metricDesciption);
+
+    public abstract List<Measure<?, ?>> asList();
+
+    public Measure<?,?>[] asArray() {
+        final List<Measure<?,?>> asList = asList();
+        final Measure<?,?>[] result = new Measure<?,?>[asList.size()];
+        for (int i = 0; i < asList.size(); i++) {
+            result[i] = asList.get(i);
+        }
+        return result;
+    }
 
 }

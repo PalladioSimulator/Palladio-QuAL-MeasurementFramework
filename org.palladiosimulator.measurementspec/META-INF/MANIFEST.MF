@@ -7,9 +7,9 @@ Bundle-Activator: org.palladiosimulator.measurementspec.Activator
 Bundle-Vendor: palladiosimulator.org
 Require-Bundle: org.eclipse.core.runtime,
  org.jscience;bundle-version="4.1.3",
- org.palladiosimulator.edp2;bundle-version="2.0.0",
- org.palladiosimulator.commons;bundle-version="1.0.0"
+ org.palladiosimulator.commons;bundle-version="1.0.0",
+ org.palladiosimulator.metricspec
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.palladiosimulator.measurementspec,
- org.palladiosimulator.measurementspec.requestcontext
+ org.palladiosimulator.measurementspec.listener

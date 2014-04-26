@@ -1,4 +1,4 @@
-package org.palladiosimulator.measurementspec;
+package org.palladiosimulator.measurementspec.listener;
 
 import org.palladiosimulator.commons.designpatterns.IAbstractObservable;
 
