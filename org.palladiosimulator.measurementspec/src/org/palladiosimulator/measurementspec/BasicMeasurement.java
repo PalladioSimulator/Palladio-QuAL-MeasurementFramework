@@ -82,7 +82,7 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
 
     @Override
     public BasicMeasurement<V, Q> getMeasurementForMetric(final MetricDescription metricDesciption) {
-        if (!metricDesciption.getId().equals(this.metricDesciption.getId())) {
+        if (!metricDesciption.getId().equals(this.getMetricDesciption().getId())) {
             return null;
         }
         return this;
