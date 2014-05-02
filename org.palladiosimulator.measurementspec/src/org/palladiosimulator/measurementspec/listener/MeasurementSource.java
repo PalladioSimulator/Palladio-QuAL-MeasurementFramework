@@ -3,6 +3,7 @@ package org.palladiosimulator.measurementspec.listener;
 import java.util.Collection;
 
 import org.palladiosimulator.commons.designpatterns.AbstractObservable;
+import org.palladiosimulator.commons.designpatterns.IAbstractObservable;
 import org.palladiosimulator.measurementspec.Measurement;
 import org.palladiosimulator.metricspec.MetricDescription;
 import org.palladiosimulator.metricspec.metricentity.MetricEntity;
@@ -11,7 +12,7 @@ import org.palladiosimulator.metricspec.metricentity.MetricEntity;
  * 
  * @author Sebastian Lehrig, Steffen Becker
  */
-public abstract class MeasurementSource extends MetricEntity implements IMeasurementSource {
+public abstract class MeasurementSource extends MetricEntity implements IAbstractObservable<IMeasurementSourceListener> {
 
     private final AbstractObservable<IMeasurementSourceListener> observableDelegate = new AbstractObservable<IMeasurementSourceListener>() {};
 
