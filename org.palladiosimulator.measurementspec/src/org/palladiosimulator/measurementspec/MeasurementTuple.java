@@ -11,63 +11,55 @@ import org.palladiosimulator.metricspec.MetricDescription;
 import org.palladiosimulator.metricspec.MetricSetDescription;
 
 /**
- * Represents a sample which is taken for a ProbeSet in a {@link RequestContext}
- * .
+ * Represents a sample which is taken for a probe list in a {@link RequestContext} .
  * <p>
- * The probe set sample is the result of a probe set measurement. It contains
- * one or more probe samples; one for each probe assigned to the underlying
- * probe set. In other words: The contained probe samples constitute the
- * combined sample for the annotated model element which is named probe set
- * sample.
+ * The probe list sample is the result of a probe list measurement. It contains one or more probe
+ * samples; one for each probe assigned to the underlying probe list. In other words: The contained
+ * probe samples constitute the combined sample for the annotated model element which is named probe
+ * list sample.
  * <p>
- * A probe set (notice: not the resulting sample) encapsulates one or more
- * probes whose results are taken for the identical model element which is
- * annotated by the probe set.
+ * A probe list (notice: not the resulting sample) encapsulates one or more probes whose results are
+ * taken for the identical model element which is annotated by the probe list.
  * 
- * @author pmerkle
- * @author Faber
- * @author Sebastian Lehrig
+ * TODO Update outdated JavaDoc.
+ * 
+ * @author pmerkle, Faber, Sebastian Lehrig
  */
-public final class MeasurementTupple extends Measurement {
+public final class MeasurementTuple extends Measurement {
 
     private final List<Measurement> subsumedMeasurements;
 
     /**
-     * Class constructor specifying the encapsulated probe samples, the context
-     * id, the model element id and the probe set id.
+     * Class constructor specifying the encapsulated probe samples, the context id, the model
+     * element id and the probe list id.
      * 
      * @param probeSamples
-     *            the probe samples to be encapsulated within this probe set
-     *            sample
+     *            the probe samples to be encapsulated within this probe set sample
      * @param ctxID
-     *            the identifier for the context in which the contained probe
-     *            samples have been taken
+     *            the identifier for the context in which the contained probe samples have been
+     *            taken
      * @param modelElementID
-     *            the id of the model element which is annotated by the
-     *            underlying probe set
+     *            the id of the model element which is annotated by the underlying probe set
      * @param probeSetID
      *            the id of the probe set according to the underlying model
      * @see RequestContext
      */
-    public MeasurementTupple(
-            final List<Measurement> subsumedMeasurements, final MetricSetDescription metrics) {
+    public MeasurementTuple(final List<Measurement> subsumedMeasurements, final MetricSetDescription metrics) {
         super(metrics);
         this.subsumedMeasurements = Collections.unmodifiableList(subsumedMeasurements);
         checkValidParameters();
     }
 
-    public MeasurementTupple(
-            final MetricSetDescription metric, final Measure ... measures) {
+    public MeasurementTuple(final MetricSetDescription metric, final Measure... measures) {
         this(metric, Arrays.asList(measures));
     }
 
-    public MeasurementTupple(
-            final MetricSetDescription metric, final List<Measure> measures) {
+    public MeasurementTuple(final MetricSetDescription metric, final List<Measure> measures) {
         super(metric);
         final ArrayList<Measurement> measurements = new ArrayList<Measurement>();
         int i = 0;
         for (final Measure measure : measures) {
-            measurements.add(new BasicMeasurement(measure,metric.getSubsumedMetrics().get(i++)));
+            measurements.add(new BasicMeasurement(measure, metric.getSubsumedMetrics().get(i++)));
         }
         this.subsumedMeasurements = Collections.unmodifiableList(measurements);
         checkValidParameters();
@@ -77,7 +69,8 @@ public final class MeasurementTupple extends Measurement {
         final MetricSetDescription metrics = (MetricSetDescription) getMetricDesciption();
 
         if (this.subsumedMeasurements.size() != metrics.getSubsumedMetrics().size()) {
-            throw new IllegalArgumentException("Number of measurements has to match the number of child metrics in the metric set description");
+            throw new IllegalArgumentException(
+                    "Number of measurements has to match the number of child metrics in the metric set description");
         }
     }
 
@@ -89,7 +82,7 @@ public final class MeasurementTupple extends Measurement {
      * @return
      * @see BasicMeasurement
      */
-    public final List<Measurement> getSubsumedMeasurements () {
+    public final List<Measurement> getSubsumedMeasurements() {
         return this.subsumedMeasurements;
     }
 
@@ -109,22 +102,24 @@ public final class MeasurementTupple extends Measurement {
     }
 
     @Override
-    public List<Measure<?,?>> asList() {
-        final ArrayList<Measure<?,?>> result = new ArrayList<Measure<?,?>>();
+    public List<Measure<?, ?>> asList() {
+        final ArrayList<Measure<?, ?>> result = new ArrayList<Measure<?, ?>>();
         for (final Measurement m : subsumedMeasurements) {
             result.addAll(m.asList());
         }
         return result;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("DataTuple [");
-        for (final Measure<?,?> m : asList()) {
+        for (final Measure<?, ?> m : asList()) {
             sb.append(m.toString() + " ");
         }
         sb.append("]");
