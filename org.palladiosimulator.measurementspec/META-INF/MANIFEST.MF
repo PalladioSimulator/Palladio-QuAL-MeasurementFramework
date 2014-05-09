@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Measurement Specification Framework
 Bundle-SymbolicName: org.palladiosimulator.measurementspec
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.palladiosimulator.measurementspec.Activator
 Bundle-Vendor: palladiosimulator.org
 Require-Bundle: org.eclipse.core.runtime,
  org.jscience;bundle-version="4.1.3",

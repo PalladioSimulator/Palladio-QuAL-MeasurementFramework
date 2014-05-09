@@ -7,10 +7,6 @@ import javax.measure.unit.Unit;
 import org.palladiosimulator.metricspec.Identifier;
 
 public class IdentifierMeasure<Q extends Quantity> extends Measure<Identifier, Q> {
-
-    /**
-     * 
-     */
     private static final long serialVersionUID = -4805416155308639141L;
     private final Identifier value;
     private final Unit<Q> unit;

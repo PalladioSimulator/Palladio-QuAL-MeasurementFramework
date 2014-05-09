@@ -1,8 +1,6 @@
 /**
+ * TODO Document me.
  * 
- */
-/**
- * @author snowball
- *
+ * @author Steffen Becker, Sebastian Lehrig
  */
 package org.palladiosimulator.measurementspec;
