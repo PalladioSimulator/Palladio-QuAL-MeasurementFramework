@@ -1,27 +1,35 @@
-package org.palladiosimulator.measurementspec;
+package org.palladiosimulator.measurementframework.measureprovider;
 
 import java.util.List;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 
+import org.palladiosimulator.measurementframework.BasicMeasurement;
+import org.palladiosimulator.measurementframework.Measurement;
 import org.palladiosimulator.metricspec.BaseMetricDescription;
 import org.palladiosimulator.metricspec.MetricDescription;
-import org.palladiosimulator.metricspec.metricentity.MetricEntity;
 
-public abstract class Measurement extends MetricEntity {
+/**
+ * Abstract implementation of a measure provider.
+ * 
+ * @author Sebastian Lehrig
+ */
+public abstract class AbstractMeasureProvider implements IMeasureProvider {
 
     /**
-     * @param measuredMetric
-     * @param measuredProbe
-     * @param modelElementID
+     * Default Constructor.
      */
-    protected Measurement(final MetricDescription measuredMetric) {
-        super(measuredMetric);
+    protected AbstractMeasureProvider() {
+        super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @SuppressWarnings("unchecked")
-    public <V,Q extends Quantity> Measure<V,Q> getMeasureForMetric(final MetricDescription wantedMetric) {
+    public <V, Q extends Quantity> Measure<V, Q> getMeasureForMetric(final MetricDescription wantedMetric) {
         if (wantedMetric == null || !(wantedMetric instanceof BaseMetricDescription)) {
             throw new IllegalArgumentException("Only base metrics have measures attached.");
         }
@@ -29,21 +37,31 @@ public abstract class Measurement extends MetricEntity {
         if (wantedMeasurement == null || !(wantedMeasurement instanceof BasicMeasurement<?, ?>)) {
             throw new IllegalStateException("Measurement for a base metric is not an BasicMeasurement.");
         }
-        final BasicMeasurement<V,Q> basicMeasurement = (BasicMeasurement<V, Q>) wantedMeasurement;
+        final BasicMeasurement<V, Q> basicMeasurement = (BasicMeasurement<V, Q>) wantedMeasurement;
         return basicMeasurement.getMeasure();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public abstract Measurement getMeasurementForMetric(final MetricDescription metricDesciption);
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public abstract List<Measure<?, ?>> asList();
 
-    public Measure<?,?>[] asArray() {
-        final List<Measure<?,?>> asList = asList();
-        final Measure<?,?>[] result = new Measure<?,?>[asList.size()];
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Measure<?, ?>[] asArray() {
+        final List<Measure<?, ?>> asList = asList();
+        final Measure<?, ?>[] result = new Measure<?, ?>[asList.size()];
         for (int i = 0; i < asList.size(); i++) {
             result[i] = asList.get(i);
         }
         return result;
     }
-
 }

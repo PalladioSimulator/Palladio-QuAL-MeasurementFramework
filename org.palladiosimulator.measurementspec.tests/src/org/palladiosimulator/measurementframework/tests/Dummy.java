@@ -1,4 +1,4 @@
-package org.palladiosimulator.measurementspec.tests;
+package org.palladiosimulator.measurementframework.tests;
 
 import org.junit.Test;
 

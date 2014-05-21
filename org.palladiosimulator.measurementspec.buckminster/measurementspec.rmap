@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
-  <rm:locator searchPathRef="measurementspec" failOnError="false"/>
+  <rm:locator searchPathRef="measurementframework" failOnError="false"/>
   <rm:locator searchPathRef="metricspec" failOnError="false"/>
   <rm:locator pattern="^org\.jscience.*" searchPathRef="thirdparty" failOnError="false"/>
   <rm:locator searchPathRef="thirdparty" failOnError="false"/>
@@ -10,9 +10,9 @@
   <rm:locator pattern="^org\.palladiosimulator\.edp2.*" searchPathRef="edp2" failOnError="false"/>
   <rm:locator searchPathRef="eclipse-release" failOnError="false"/>
   <rm:locator searchPathRef="orbit" failOnError="false"/>
-  <rm:searchPath name="measurementspec">
+  <rm:searchPath name="measurementframework">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="svn">
-      <rm:uri format="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/MeasurementSpecification/trunk/{0}">
+      <rm:uri format="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/MeasurementFramework/trunk/{0}">
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>

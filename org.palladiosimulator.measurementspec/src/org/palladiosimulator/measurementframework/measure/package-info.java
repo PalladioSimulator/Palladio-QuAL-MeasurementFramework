@@ -5,4 +5,4 @@
  * 
  * @author Steffen Becker, Sebastian Lehrig
  */
-package org.palladiosimulator.measurementspec.listener;
+package org.palladiosimulator.measurementframework.measure;

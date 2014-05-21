@@ -1,11 +1,11 @@
-package org.palladiosimulator.measurementspec.listener;
+package org.palladiosimulator.measurementframework.listener;
 
-import org.palladiosimulator.measurementspec.Measurement;
+import org.palladiosimulator.measurementframework.Measurement;
 
 /**
  * Once measurement sources have new measurements at hand, they have to inform registered observers
  * about these new measurements. To do so, measurement sources provide this dedicated interfaces
- * with call-back methods that observers have to implement. Measurement sources bind this interface
+ * with call-back methods that observers have to implement. AbstractMeasureProvider sources bind this interface
  * to the generic type parameter <code>T</code> of <code>AbstractObservable</code> to implement this
  * observer pattern.
  * 
@@ -16,7 +16,7 @@ public interface IMeasurementSourceListener {
     /**
      * Call-back method for observers, informing these about a new measurement.
      * 
-     * @param newMeasurement The newly available Measurement.
+     * @param newMeasurement The newly available AbstractMeasureProvider.
      */
     public void newMeasurementAvailable(Measurement newMeasurement);
 

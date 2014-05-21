@@ -1,4 +1,4 @@
-package org.palladiosimulator.measurementspec;
+package org.palladiosimulator.measurementframework.measure;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;

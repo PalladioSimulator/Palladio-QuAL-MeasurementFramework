@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Measurement Specification Framework
-Bundle-SymbolicName: org.palladiosimulator.measurementspec
+Bundle-Name: Measurement Framework
+Bundle-SymbolicName: org.palladiosimulator.measurementframework
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: palladiosimulator.org
 Require-Bundle: org.eclipse.core.runtime,
@@ -10,5 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.palladiosimulator.metricspec
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: org.palladiosimulator.measurementspec,
- org.palladiosimulator.measurementspec.listener
+Export-Package: org.palladiosimulator.measurementframework,
+ org.palladiosimulator.measurementframework.listener,
+ org.palladiosimulator.measurementframework.measure,
+ org.palladiosimulator.measurementframework.measureprovider

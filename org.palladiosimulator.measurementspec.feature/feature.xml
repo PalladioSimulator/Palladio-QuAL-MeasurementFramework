@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.palladiosimulator.measurementspec.feature"
-      label="Measurement Specification Framework"
+      id="org.palladiosimulator.measurementframework.feature"
+      label="Measurement Framework"
       version="1.0.0.qualifier"
       provider-name="palladiosimulator.org">
 
@@ -221,7 +221,7 @@ litigation.
    </requires>
 
    <plugin
-         id="org.palladiosimulator.measurementspec"
+         id="org.palladiosimulator.measurementframework"
          download-size="0"
          install-size="0"
          version="0.0.0"

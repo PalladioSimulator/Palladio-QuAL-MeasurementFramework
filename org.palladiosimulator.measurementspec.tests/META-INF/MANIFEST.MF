@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Test Plugin for the Measurement Specification Framework
-Bundle-SymbolicName: org.palladiosimulator.measurementspec.tests
+Bundle-Name: Test Plugin for the Measurement Framework
+Bundle-SymbolicName: org.palladiosimulator.measurementframework.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: palladiosimulator.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -3,4 +3,4 @@
  * 
  * @author Steffen Becker, Sebastian Lehrig
  */
-package org.palladiosimulator.measurementspec;
+package org.palladiosimulator.measurementframework.measureprovider;

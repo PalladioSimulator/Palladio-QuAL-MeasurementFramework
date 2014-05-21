@@ -1,15 +1,16 @@
-package org.palladiosimulator.measurementspec.listener;
+package org.palladiosimulator.measurementframework.listener;
 
 import java.util.Collection;
 
 import org.palladiosimulator.commons.designpatterns.AbstractObservable;
 import org.palladiosimulator.commons.designpatterns.IAbstractObservable;
-import org.palladiosimulator.measurementspec.Measurement;
+import org.palladiosimulator.measurementframework.Measurement;
 import org.palladiosimulator.metricspec.MetricDescription;
+import org.palladiosimulator.metricspec.metricentity.IMetricEntity;
 import org.palladiosimulator.metricspec.metricentity.MetricEntity;
 
 /**
- * Measurement sources provide measurements from analyzers, e.g., by providing the measurements from
+ * AbstractMeasureProvider sources provide measurements from analyzers, e.g., by providing the measurements from
  * probes. To provide such measurements, they implement the observer pattern. Observers have to
  * implement the {@link IMeasurementSourceListener} interface to get informed about new
  * measurements.
@@ -79,7 +80,7 @@ public abstract class MeasurementSource extends MetricEntity implements IAbstrac
      * @return <code>true</code> if measurement source and measurement are compatible,
      *         <code>false</code> otherwise.
      */
-    private boolean isCompatibleMeasurement(final Measurement measurement) {
+    private boolean isCompatibleMeasurement(final IMetricEntity measurement) {
         if (!isCompatibleWith(measurement.getMetricDesciption())) {
             return false;
         }
