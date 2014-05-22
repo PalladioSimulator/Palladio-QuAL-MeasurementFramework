@@ -1,6 +1,7 @@
 package org.palladiosimulator.measurementframework.measureprovider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.measure.Measure;
@@ -34,7 +35,7 @@ public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
     }
 
     @Override
-    public List<Measure<?, ?>> asList() {
+    public final List<Measure<?, ?>> asList() {
         final ArrayList<Measure<?, ?>> result = new ArrayList<Measure<?, ?>>();
         for (final Measurement m : this.measurements) {
             result.addAll(m.asList());
@@ -56,5 +57,9 @@ public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
         }
         sb.append("]");
         return sb.toString();
+    }
+
+    public final List<Measurement> getSubsumedMeasurements() {
+        return Collections.unmodifiableList(this.measurements);
     }
 }
