@@ -21,7 +21,7 @@ import org.palladiosimulator.metricspec.NumericalBaseMetricDescription;
  * 
  * @author Sebastian Lehrig
  */
-public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {        
+public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
 
     private final Measure<V, Q> measure;
 
@@ -37,7 +37,7 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
         super(metricDescription);
         checkMeasureDataType(measure, metricDescription);
         this.measure = measure;
-    }    
+    }
 
     /**
      * Checks whether a given measure and a given metric are compatible with each other.
@@ -75,8 +75,8 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
             }
         }
 
-    }    
-    
+    }
+
     /**
      * Returns the encapsulated measured value in conjunction with its measured {@link Quantity}.
      * 
@@ -84,16 +84,16 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
      * @see Measure
      */
     public final Measure<V, Q> getMeasure() {
-        return this.getMeasureForMetric(this.getMetricDesciption());
+        return this.measure;
     }
 
     @Override
     public List<Measure<?, ?>> asList() {
-        final ArrayList<Measure<?,?>> result = new ArrayList<Measure<?,?>>(1);
+        final ArrayList<Measure<?, ?>> result = new ArrayList<Measure<?, ?>>(1);
         result.add(this.measure);
         return result;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -110,6 +110,5 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
         final BasicMeasurement<S, T> basicMeasurement = (BasicMeasurement<S, T>) wantedMeasurement;
         return basicMeasurement.getMeasure();
     }
-    
-    
+
 }
