@@ -43,8 +43,8 @@ public final class TupleMeasurement extends Measurement {
         this.subsumedMeasurements = subsumedMeasurements;
         this.measureProvider = new MeasurementListMeasureProvider(subsumedMeasurements);
 
-        final MetricSetDescription metrics = (MetricSetDescription) getMetricDesciption();
-        if (subsumedMeasurements.size() != metrics.getSubsumedMetrics().size()) {
+        final MetricSetDescription metricSetDescription = (MetricSetDescription) getMetricDesciption();
+        if (subsumedMeasurements.size() != metricSetDescription.getSubsumedMetrics().size()) {
             throw new IllegalArgumentException(
                     "Number of measurements has to match the number of child metrics in the metric set description");
         }
