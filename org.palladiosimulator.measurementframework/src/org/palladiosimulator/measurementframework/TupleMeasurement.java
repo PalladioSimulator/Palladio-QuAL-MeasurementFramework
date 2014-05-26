@@ -37,16 +37,22 @@ public final class TupleMeasurement extends Measurement {
      * @throws IllegalArgumentException
      *             If number of measures does not equal number of subsumed metrics.
      */
-    public TupleMeasurement(final List<Measurement> subsumedMeasurements, final MetricSetDescription metricDescription) {
-        super(metricDescription);
+    public TupleMeasurement(final List<Measurement> subsumedMeasurements, final MetricSetDescription metricSetDescription) {
+        super(metricSetDescription);
 
         this.subsumedMeasurements = subsumedMeasurements;
         this.measureProvider = new MeasurementListMeasureProvider(subsumedMeasurements);
 
-        final MetricSetDescription metricSetDescription = (MetricSetDescription) getMetricDesciption();
         if (subsumedMeasurements.size() != metricSetDescription.getSubsumedMetrics().size()) {
             throw new IllegalArgumentException(
                     "Number of measurements has to match the number of child metrics in the metric set description");
+        }
+        
+        int i = 0;
+        for(MetricDescription subsumedMetric : metricSetDescription.getSubsumedMetrics()) {
+            if(!subsumedMeasurements.get(i++).getMetricDesciption().getId().equals(subsumedMetric.getId())) {
+                throw new IllegalArgumentException("Subsumed metric \""+subsumedMetric.getName()+"\" not present in measurement");
+            }
         }
     }
 
