@@ -47,9 +47,9 @@ public final class TupleMeasurement extends Measurement {
             throw new IllegalArgumentException(
                     "Number of measurements has to match the number of child metrics in the metric set description");
         }
-        
+
         int i = 0;
-        for(MetricDescription subsumedMetric : metricSetDescription.getSubsumedMetrics()) {
+        for(final MetricDescription subsumedMetric : metricSetDescription.getSubsumedMetrics()) {
             if(!subsumedMeasurements.get(i++).getMetricDesciption().getId().equals(subsumedMetric.getId())) {
                 throw new IllegalArgumentException("Subsumed metric \""+subsumedMetric.getName()+"\" not present in measurement");
             }
@@ -70,7 +70,7 @@ public final class TupleMeasurement extends Measurement {
         final List<Measurement> subsumedMeasurements = new ArrayList<Measurement>();
         int i = 0;
         for (final Measure<?, ?> measure : measures) {
-            MetricDescription subsumedMetric = metricDescription.getSubsumedMetrics().get(i++);
+            final MetricDescription subsumedMetric = metricDescription.getSubsumedMetrics().get(i++);
             if (subsumedMetric instanceof BaseMetricDescription) {
                 subsumedMeasurements.add(new BasicMeasurement(measure, (BaseMetricDescription) subsumedMetric));
             } else if (subsumedMetric instanceof MetricSetDescription) {
@@ -94,11 +94,29 @@ public final class TupleMeasurement extends Measurement {
      * {@inheritDoc}
      */
     @Override
-    public <V, Q extends Quantity> Measure<V, Q> getMeasureForMetric(MetricDescription wantedMetric) {
+    public <V, Q extends Quantity> Measure<V, Q> getMeasureForMetric(final MetricDescription wantedMetric) {
         return this.measureProvider.getMeasureForMetric(wantedMetric);
     }
 
     public List<Measurement> getSubsumedMeasurements() {
         return this.subsumedMeasurements;
     }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("TupleMeasurement [");
+        for (final Measure<?,?> sub : asList()) {
+            sb.append(sub.toString());
+            sb.append(" ");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        sb.append("]");
+        return sb.toString();
+    }
+
+
 }
