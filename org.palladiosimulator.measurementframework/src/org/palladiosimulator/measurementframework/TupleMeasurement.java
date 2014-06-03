@@ -51,7 +51,7 @@ public final class TupleMeasurement extends Measurement {
         int i = 0;
         for(final MetricDescription subsumedMetric : metricSetDescription.getSubsumedMetrics()) {
             if(!subsumedMeasurements.get(i++).getMetricDesciption().getId().equals(subsumedMetric.getId())) {
-                throw new IllegalArgumentException("Subsumed metric \""+subsumedMetric.getName()+"\" not present in measurement");
+                throw new IllegalArgumentException("Subsumed metric \""+subsumedMetric.getName()+"\" of metric \""+metricSetDescription.getName()+"\" not present in measurement");
             }
         }
     }
