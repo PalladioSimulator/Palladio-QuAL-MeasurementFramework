@@ -20,8 +20,7 @@ import org.palladiosimulator.metricspec.metricentity.MetricEntity;
 public abstract class MeasurementSource extends MetricEntity implements IAbstractObservable<IMeasurementSourceListener> {
 
     /** Delegator object for handling observers. */
-    private final AbstractObservable<IMeasurementSourceListener> observableDelegate = new AbstractObservable<IMeasurementSourceListener>() {
-    };
+    private final AbstractObservable<IMeasurementSourceListener> observableDelegate;
 
     /**
      * Default constructor. Nothing special.
@@ -31,6 +30,9 @@ public abstract class MeasurementSource extends MetricEntity implements IAbstrac
      */
     public MeasurementSource(final MetricDescription metricDesciption) {
         super(metricDesciption);
+
+        this.observableDelegate = new AbstractObservable<IMeasurementSourceListener>() {
+        };
     }
 
     /**
