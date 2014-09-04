@@ -16,13 +16,24 @@ import org.palladiosimulator.metricspec.MetricDescription;
  */
 public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
 
+    /** The given list of measurement. */
     private final List<Measurement> measurements;
 
+    /**
+     * Default constructor. Initializes this measure provider using a given list of measurements.
+     * Each such measurement comes with measures to be provided.
+     * 
+     * @param measurements
+     *            the given list of measurements.
+     */
     public MeasurementListMeasureProvider(final List<Measurement> measurements) {
         super();
         this.measurements = measurements;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Measurement getMeasurementForMetric(final MetricDescription wantedMetric) {
         for (final Measurement subsubmedMeasurement : this.measurements) {
@@ -34,6 +45,9 @@ public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final List<Measure<?, ?>> asList() {
         final ArrayList<Measure<?, ?>> result = new ArrayList<Measure<?, ?>>();
@@ -43,10 +57,8 @@ public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
         return result;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
+    /**
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -59,6 +71,11 @@ public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
         return sb.toString();
     }
 
+    /**
+     * Returns the list of subsumed measurements managed by this class.
+     * 
+     * @return the list of subsumed measurements.
+     */
     public final List<Measurement> getSubsumedMeasurements() {
         return Collections.unmodifiableList(this.measurements);
     }
