@@ -10,7 +10,7 @@ import org.palladiosimulator.metricspec.metricentity.IMetricEntity;
 import org.palladiosimulator.metricspec.metricentity.MetricEntity;
 
 /**
- * Measurements are taken in a (set of) measure(s), a metric and at a concrete measuring point.
+ * Measurements are taken in a (set of) measure(s), a metric, and at a concrete measuring point.
  * 
  * TODO Add measuring point here.
  * 
@@ -61,7 +61,7 @@ public abstract class Measurement implements IMeasureProvider, IMetricEntity {
         }
         return result;
     }
-    
+
     public Measurement getMeasurementForMetric(final MetricDescription metricDesciption) {
         if (!metricDesciption.getId().equals(getMetricDesciption().getId())) {
             return null;
