@@ -32,7 +32,7 @@ public final class TupleMeasurement extends Measurement {
      * @param subsumedMeasurements
      *            List of subsumed measurements, needed to construct a measure provider as needed by
      *            the super class.
-     * @param metricDescription
+     * @param metricSetDescription
      *            Metric set description of this measurement.
      * @throws IllegalArgumentException
      *             If number of measures does not equal number of subsumed metrics.
