@@ -10,10 +10,10 @@ import org.palladiosimulator.metricspec.metricentity.IMetricEntity;
 import org.palladiosimulator.metricspec.metricentity.MetricEntity;
 
 /**
- * AbstractMeasureProvider sources provide measurements from analyzers, e.g., by providing the measurements from
- * probes. To provide such measurements, they implement the observer pattern. Observers have to
- * implement the {@link IMeasurementSourceListener} interface to get informed about new
- * measurements.
+ * AbstractMeasureProvider sources provide measurements from analyzers, e.g., by providing the
+ * measurements from probes. To provide such measurements, they implement the observer pattern.
+ * Observers have to implement the {@link IMeasurementSourceListener} interface to get informed
+ * about new measurements.
  * 
  * @author Sebastian Lehrig, Steffen Becker
  */

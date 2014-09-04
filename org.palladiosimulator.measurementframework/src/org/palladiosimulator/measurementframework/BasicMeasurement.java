@@ -98,7 +98,9 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings({ "unchecked" })
+    @SuppressWarnings({
+        "unchecked"
+    })
     public <S, T extends Quantity> Measure<S, T> getMeasureForMetric(final MetricDescription wantedMetric) {
         if (wantedMetric == null || !(wantedMetric instanceof BaseMetricDescription)) {
             throw new IllegalArgumentException("Only base metrics have measures attached.");

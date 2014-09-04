@@ -37,7 +37,8 @@ public final class TupleMeasurement extends Measurement {
      * @throws IllegalArgumentException
      *             If number of measures does not equal number of subsumed metrics.
      */
-    public TupleMeasurement(final List<Measurement> subsumedMeasurements, final MetricSetDescription metricSetDescription) {
+    public TupleMeasurement(final List<Measurement> subsumedMeasurements,
+            final MetricSetDescription metricSetDescription) {
         super(metricSetDescription);
 
         this.subsumedMeasurements = subsumedMeasurements;
@@ -49,9 +50,10 @@ public final class TupleMeasurement extends Measurement {
         }
 
         int i = 0;
-        for(final MetricDescription subsumedMetric : metricSetDescription.getSubsumedMetrics()) {
-            if(!subsumedMeasurements.get(i++).getMetricDesciption().getId().equals(subsumedMetric.getId())) {
-                throw new IllegalArgumentException("Subsumed metric \""+subsumedMetric.getName()+"\" of metric \""+metricSetDescription.getName()+"\" not present in measurement");
+        for (final MetricDescription subsumedMetric : metricSetDescription.getSubsumedMetrics()) {
+            if (!subsumedMeasurements.get(i++).getMetricDesciption().getId().equals(subsumedMetric.getId())) {
+                throw new IllegalArgumentException("Subsumed metric \"" + subsumedMetric.getName() + "\" of metric \""
+                        + metricSetDescription.getName() + "\" not present in measurement");
             }
         }
     }
@@ -64,7 +66,9 @@ public final class TupleMeasurement extends Measurement {
         this(computeSubsumedMeasures(metricDescription, measures), metricDescription);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({
+            "unchecked", "rawtypes"
+    })
     private static List<Measurement> computeSubsumedMeasures(final MetricSetDescription metricDescription,
             final List<Measure<?, ?>> measures) {
         final List<Measurement> subsumedMeasurements = new ArrayList<Measurement>();
@@ -102,21 +106,22 @@ public final class TupleMeasurement extends Measurement {
         return this.subsumedMeasurements;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("TupleMeasurement [");
-        for (final Measure<?,?> sub : asList()) {
+        for (final Measure<?, ?> sub : asList()) {
             sb.append(sub.toString());
             sb.append(" ");
         }
-        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length() - 1);
         sb.append("]");
         return sb.toString();
     }
-
 
 }
