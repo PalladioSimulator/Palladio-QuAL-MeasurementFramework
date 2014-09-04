@@ -2,6 +2,7 @@ package org.palladiosimulator.measurementframework;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.measure.Measure;
@@ -58,18 +59,44 @@ public final class TupleMeasurement extends Measurement {
         }
     }
 
+    /**
+     * Convenience constructor based on subsumed measures.
+     * 
+     * @param metricDescription
+     *            Metric set description of this measurement.
+     * @param measures
+     *            Subsumed measures.
+     */
     public TupleMeasurement(final MetricSetDescription metricDescription, final Measure<?, ?>... measures) {
         this(metricDescription, Arrays.asList(measures));
     }
 
+    /**
+     * Convenience constructor based on subsumed measures.
+     * 
+     * @param metricDescription
+     *            Metric set description of this measurement.
+     * @param measures
+     *            Subsumed measures.
+     */
     public TupleMeasurement(final MetricSetDescription metricDescription, final List<Measure<?, ?>> measures) {
-        this(computeSubsumedMeasures(metricDescription, measures), metricDescription);
+        this(computeSubsumedMeasurements(metricDescription, measures), metricDescription);
     }
 
+    /**
+     * Computes a list of subsumed measurements based on the given list of measures that conform to
+     * the given metric set description.
+     * 
+     * @param metricDescription
+     *            the metric set description measurements have to conform to.
+     * @param measures
+     *            the given list of measures.
+     * @return the computed list of subsumed measurements.
+     */
     @SuppressWarnings({
             "unchecked", "rawtypes"
     })
-    private static List<Measurement> computeSubsumedMeasures(final MetricSetDescription metricDescription,
+    private static List<Measurement> computeSubsumedMeasurements(final MetricSetDescription metricDescription,
             final List<Measure<?, ?>> measures) {
         final List<Measurement> subsumedMeasurements = new ArrayList<Measurement>();
         int i = 0;
@@ -102,8 +129,13 @@ public final class TupleMeasurement extends Measurement {
         return this.measureProvider.getMeasureForMetric(wantedMetric);
     }
 
+    /**
+     * Returns the list of subsumed measurements.
+     * 
+     * @return the list of subsumed measurements.
+     */
     public List<Measurement> getSubsumedMeasurements() {
-        return this.subsumedMeasurements;
+        return Collections.unmodifiableList(this.subsumedMeasurements);
     }
 
     /*

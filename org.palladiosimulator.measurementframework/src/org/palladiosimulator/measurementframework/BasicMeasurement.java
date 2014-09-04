@@ -14,16 +14,17 @@ import org.palladiosimulator.metricspec.NumericalBaseMetricDescription;
 /**
  * Represents a basic measurement, i.e., a measurement for a {@see BaseMetricDescription}.
  * 
- * @param <V>
+ * @param <VALUE_TYPE>
  *            denotes the class of the taken sample (Integer, Long, ...)
- * @param <Q>
+ * @param <QUANTITY>
  *            denotes the measured {@link Quantity}
  * 
  * @author Sebastian Lehrig
  */
-public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
+public final class BasicMeasurement<VALUE_TYPE, QUANTITY extends Quantity> extends Measurement {
 
-    private final Measure<V, Q> measure;
+    /** The represented measure. */
+    private final Measure<VALUE_TYPE, QUANTITY> measure;
 
     /**
      * Default Constructor.
@@ -33,7 +34,7 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
      * @param metricDescription
      *            The base metric to be represented.
      */
-    public BasicMeasurement(final Measure<V, Q> measure, final BaseMetricDescription metricDescription) {
+    public BasicMeasurement(final Measure<VALUE_TYPE, QUANTITY> measure, final BaseMetricDescription metricDescription) {
         super(metricDescription);
         checkMeasureDataType(measure, metricDescription);
         this.measure = measure;
@@ -47,7 +48,8 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
      * @param metricDescription
      *            The metric to be checked.
      */
-    private void checkMeasureDataType(final Measure<V, Q> measure, final BaseMetricDescription metricDescription) {
+    private void checkMeasureDataType(final Measure<VALUE_TYPE, QUANTITY> measure,
+            final BaseMetricDescription metricDescription) {
         final Class<?> valueDataType;
         switch (metricDescription.getCaptureType()) {
         case IDENTIFIER:
@@ -69,7 +71,8 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
         }
 
         if (metricDescription instanceof NumericalBaseMetricDescription) {
-            final NumericalBaseMetricDescription numericalBaseMetricDescription = (NumericalBaseMetricDescription) metricDescription;
+            final NumericalBaseMetricDescription numericalBaseMetricDescription;
+            numericalBaseMetricDescription = (NumericalBaseMetricDescription) metricDescription;
             if (!measure.getUnit().isCompatible(numericalBaseMetricDescription.getDefaultUnit())) {
                 throw new IllegalArgumentException("Unit of measurement not compatible with declared base metric");
             }
@@ -83,7 +86,7 @@ public final class BasicMeasurement<V, Q extends Quantity> extends Measurement {
      * @return the measured value and its quantity
      * @see Measure
      */
-    public final Measure<V, Q> getMeasure() {
+    public final Measure<VALUE_TYPE, QUANTITY> getMeasure() {
         return this.measure;
     }
 
