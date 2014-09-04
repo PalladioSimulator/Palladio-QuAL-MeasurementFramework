@@ -6,12 +6,35 @@ import javax.measure.unit.Unit;
 
 import org.palladiosimulator.metricspec.Identifier;
 
-public class IdentifierMeasure<Q extends Quantity> extends Measure<Identifier, Q> {
-    private static final long serialVersionUID = -4805416155308639141L;
-    private final Identifier value;
-    private final Unit<Q> unit;
+/**
+ * Holds <code>Identifier</code> values that are used to characterize textual base metrics.
+ * 
+ * @param <QUANTITY>
+ *            the quantity to be used, e.g., <code>Dimensionless</code> with <code>Unit.ONE</code>.
+ * 
+ * @author Steffen Becker, Sebastian Lehrig
+ */
+public class IdentifierMeasure<QUANTITY extends Quantity> extends Measure<Identifier, QUANTITY> {
 
-    public IdentifierMeasure(final Identifier identifier, final Unit<Q> unit) {
+    /** Generated serialVersionUID. */
+    private static final long serialVersionUID = -4805416155308639141L;
+
+    /** The given identifier used as a measure value. */
+    private final Identifier value;
+
+    /** The given unit conforming to <code>QUANTITY</code>. */
+    private final Unit<QUANTITY> unit;
+
+    /**
+     * Default constructor. Initializes this measure based on a given identifier and a unit
+     * conforming to <code>QUANTITY</code>.
+     * 
+     * @param identifier
+     *            the identifier used for initialization.
+     * @param unit
+     *            the unit used for initialization.
+     */
+    public IdentifierMeasure(final Identifier identifier, final Unit<QUANTITY> unit) {
         super();
         this.value = identifier;
         this.unit = unit;
@@ -23,22 +46,32 @@ public class IdentifierMeasure<Q extends Quantity> extends Measure<Identifier, Q
     }
 
     @Override
-    public Unit<Q> getUnit() {
+    public Unit<QUANTITY> getUnit() {
         return unit;
     }
 
     @Override
-    public Measure<Identifier, Q> to(final Unit<Q> unit) {
+    public Measure<Identifier, QUANTITY> to(final Unit<QUANTITY> unit) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public double doubleValue(final Unit<Q> unit) {
+    public double doubleValue(final Unit<QUANTITY> unit) {
         throw new UnsupportedOperationException();
     }
 
-    public static <U extends Quantity> IdentifierMeasure<U> valueOf(final Identifier identifier, final Unit<U> unit) {
-        return new IdentifierMeasure<U>(identifier, unit);
+    /**
+     * Factory for IdentifierMeasures based on the given identifier and unit.
+     * 
+     * @param identifier
+     *            the identifier used for initialization.
+     * @param unit
+     *            the unit used for initialization.
+     * @param <Q> the quantity to be used.
+     * @return a newly created IdentifierMeasure object.
+     */
+    public static <Q extends Quantity> IdentifierMeasure<Q> valueOf(final Identifier identifier, final Unit<Q> unit) {
+        return new IdentifierMeasure<Q>(identifier, unit);
     }
 
 }
