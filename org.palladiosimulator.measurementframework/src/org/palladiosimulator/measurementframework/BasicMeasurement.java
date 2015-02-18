@@ -67,7 +67,9 @@ public final class BasicMeasurement<VALUE_TYPE, QUANTITY extends Quantity> exten
         }
 
         if (!valueDataType.isAssignableFrom(measure.getValue().getClass())) {
-            throw new IllegalArgumentException("Datatype of measurement not compatible with declared base metric");
+            throw new IllegalArgumentException("Datatype of measurement (" + measure.getValue().getClass().getName()
+                    + ") not compatible with declared base metric (" + valueDataType.getName() + "; "
+                    + metricDescription.getName() + ")");
         }
 
         if (metricDescription instanceof NumericalBaseMetricDescription) {
@@ -101,9 +103,7 @@ public final class BasicMeasurement<VALUE_TYPE, QUANTITY extends Quantity> exten
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings({
-        "unchecked"
-    })
+    @SuppressWarnings({ "unchecked" })
     public <S, T extends Quantity> Measure<S, T> getMeasureForMetric(final MetricDescription wantedMetric) {
         if (wantedMetric == null || !(wantedMetric instanceof BaseMetricDescription)) {
             throw new IllegalArgumentException("Only base metrics have measures attached.");
