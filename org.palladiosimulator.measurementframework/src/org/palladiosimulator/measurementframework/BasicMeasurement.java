@@ -76,7 +76,10 @@ public final class BasicMeasurement<VALUE_TYPE, QUANTITY extends Quantity> exten
             final NumericalBaseMetricDescription numericalBaseMetricDescription;
             numericalBaseMetricDescription = (NumericalBaseMetricDescription) metricDescription;
             if (!measure.getUnit().isCompatible(numericalBaseMetricDescription.getDefaultUnit())) {
-                throw new IllegalArgumentException("Unit of measurement not compatible with declared base metric");
+                throw new IllegalArgumentException("Unit of measurement (" + measure.getUnit()
+                        + ") not compatible with declared base metric unit ("
+                        + numericalBaseMetricDescription.getDefaultUnit() + ") of metric description \""
+                        + numericalBaseMetricDescription.getName() + "\"");
             }
         }
 
