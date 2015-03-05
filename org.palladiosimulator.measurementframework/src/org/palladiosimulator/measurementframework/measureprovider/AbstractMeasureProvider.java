@@ -6,7 +6,7 @@ import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 
 import org.palladiosimulator.measurementframework.BasicMeasurement;
-import org.palladiosimulator.measurementframework.Measurement;
+import org.palladiosimulator.measurementframework.MeasuringValue;
 import org.palladiosimulator.metricspec.BaseMetricDescription;
 import org.palladiosimulator.metricspec.MetricDescription;
 
@@ -33,7 +33,7 @@ public abstract class AbstractMeasureProvider implements IMeasureProvider {
         if (wantedMetric == null || !(wantedMetric instanceof BaseMetricDescription)) {
             throw new IllegalArgumentException("Only base metrics have measures attached.");
         }
-        final Measurement wantedMeasurement = getMeasurementForMetric(wantedMetric);
+        final MeasuringValue wantedMeasurement = getMeasurementForMetric(wantedMetric);
         if (wantedMeasurement == null || !(wantedMeasurement instanceof BasicMeasurement<?, ?>)) {
             throw new IllegalStateException("Measurement for a base metric is not an BasicMeasurement.");
         }
@@ -44,7 +44,7 @@ public abstract class AbstractMeasureProvider implements IMeasureProvider {
     /**
      * {@inheritDoc}
      */
-    public abstract Measurement getMeasurementForMetric(final MetricDescription metricDesciption);
+    public abstract MeasuringValue getMeasurementForMetric(final MetricDescription metricDesciption);
 
     /**
      * {@inheritDoc}

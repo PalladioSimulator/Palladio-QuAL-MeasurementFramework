@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.palladiosimulator.commons.designpatterns.AbstractObservable;
 import org.palladiosimulator.commons.designpatterns.IAbstractObservable;
-import org.palladiosimulator.measurementframework.Measurement;
+import org.palladiosimulator.measurementframework.MeasuringValue;
 import org.palladiosimulator.metricspec.MetricDescription;
 import org.palladiosimulator.metricspec.metricentity.IMetricEntity;
 import org.palladiosimulator.metricspec.metricentity.MetricEntity;
@@ -66,7 +66,7 @@ public abstract class MeasurementSource extends MetricEntity implements IAbstrac
      * @param newMeasurement
      *            The new measurement observers are informed about.
      */
-    protected final void notifyMeasurementSourceListener(final Measurement newMeasurement) {
+    protected final void notifyMeasurementSourceListener(final MeasuringValue newMeasurement) {
         if (!isCompatibleMeasurement(newMeasurement)) {
             throw new IllegalArgumentException("Taken measurement has an incompatible metric");
         }

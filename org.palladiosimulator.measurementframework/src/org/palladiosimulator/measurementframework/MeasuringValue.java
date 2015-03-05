@@ -10,13 +10,14 @@ import org.palladiosimulator.metricspec.metricentity.IMetricEntity;
 import org.palladiosimulator.metricspec.metricentity.MetricEntity;
 
 /**
- * Measurements are taken in a list of measures, a metric description, and at a concrete measuring point.
+ * Measuring values are taken in a list of measures, a metric description, and at a concrete
+ * measuring point.
  * 
  * TODO Add measuring point here.
  * 
  * @author Sebastian Lehrig
  */
-public abstract class Measurement implements IMeasureProvider, IMetricEntity {
+public abstract class MeasuringValue implements IMeasureProvider, IMetricEntity {
 
     /** Delegate to a metric entity holding the represented metric. */
     private final MetricEntity metricEntity;
@@ -27,7 +28,7 @@ public abstract class Measurement implements IMeasureProvider, IMetricEntity {
      * @param metricDescription
      *            Delegator object for implementing IMetricEntity.
      */
-    public Measurement(final MetricDescription metricDescription) {
+    public MeasuringValue(final MetricDescription metricDescription) {
         super();
 
         this.metricEntity = new MetricEntity(metricDescription);
@@ -63,14 +64,14 @@ public abstract class Measurement implements IMeasureProvider, IMetricEntity {
     }
 
     /**
-     * Returns this measurement in case it conforms to the given metric description.
+     * Returns this measuring value in case it conforms to the given metric description.
      * 
      * @param metricDesciption
      *            the given metric description.
-     * @return this measurement if it conforms to the given metric description, <code>null</code>
-     *         otherwise.
+     * @return this measuring value if it conforms to the given metric description,
+     *         <code>null</code> otherwise.
      */
-    public Measurement getMeasurementForMetric(final MetricDescription metricDesciption) {
+    public MeasuringValue getMeasuringValueForMetric(final MetricDescription metricDesciption) {
         if (!metricDesciption.getId().equals(getMetricDesciption().getId())) {
             return null;
         }

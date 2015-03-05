@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.measure.Measure;
 
-import org.palladiosimulator.measurementframework.Measurement;
+import org.palladiosimulator.measurementframework.MeasuringValue;
 import org.palladiosimulator.metricspec.MetricDescription;
 
 /**
@@ -17,7 +17,7 @@ import org.palladiosimulator.metricspec.MetricDescription;
 public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
 
     /** The given list of measurement. */
-    private final List<Measurement> measurements;
+    private final List<MeasuringValue> measurements;
 
     /**
      * Default constructor. Initializes this measure provider using a given list of measurements.
@@ -26,7 +26,7 @@ public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
      * @param measurements
      *            the given list of measurements.
      */
-    public MeasurementListMeasureProvider(final List<Measurement> measurements) {
+    public MeasurementListMeasureProvider(final List<MeasuringValue> measurements) {
         super();
         this.measurements = measurements;
     }
@@ -35,9 +35,9 @@ public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
      * {@inheritDoc}
      */
     @Override
-    public Measurement getMeasurementForMetric(final MetricDescription wantedMetric) {
-        for (final Measurement subsubmedMeasurement : this.measurements) {
-            final Measurement subsubmedMeasure = subsubmedMeasurement.getMeasurementForMetric(wantedMetric);
+    public MeasuringValue getMeasurementForMetric(final MetricDescription wantedMetric) {
+        for (final MeasuringValue subsubmedMeasurement : this.measurements) {
+            final MeasuringValue subsubmedMeasure = subsubmedMeasurement.getMeasuringValueForMetric(wantedMetric);
             if (subsubmedMeasure != null) {
                 return subsubmedMeasure;
             }
@@ -51,7 +51,7 @@ public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
     @Override
     public final List<Measure<?, ?>> asList() {
         final ArrayList<Measure<?, ?>> result = new ArrayList<Measure<?, ?>>();
-        for (final Measurement m : this.measurements) {
+        for (final MeasuringValue m : this.measurements) {
             result.addAll(m.asList());
         }
         return result;
@@ -76,7 +76,7 @@ public class MeasurementListMeasureProvider extends AbstractMeasureProvider {
      * 
      * @return the list of subsumed measurements.
      */
-    public final List<Measurement> getSubsumedMeasurements() {
+    public final List<MeasuringValue> getSubsumedMeasurements() {
         return Collections.unmodifiableList(this.measurements);
     }
 }

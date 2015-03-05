@@ -1,6 +1,6 @@
 package org.palladiosimulator.measurementframework.listener;
 
-import org.palladiosimulator.measurementframework.Measurement;
+import org.palladiosimulator.measurementframework.MeasuringValue;
 
 /**
  * Once measurement sources have new measurements at hand, they have to inform registered observers
@@ -19,7 +19,7 @@ public interface IMeasurementSourceListener {
      * @param newMeasurement
      *            The newly available AbstractMeasureProvider.
      */
-    public void newMeasurementAvailable(Measurement newMeasurement);
+    public void newMeasurementAvailable(MeasuringValue newMeasurement);
 
     /**
      * After having registered, e.g., at a {@link Calculator}, this method gets invoked to inform

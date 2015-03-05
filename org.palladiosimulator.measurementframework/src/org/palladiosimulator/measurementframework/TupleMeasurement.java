@@ -19,13 +19,13 @@ import org.palladiosimulator.metricspec.MetricSetDescription;
  * 
  * @author Sebastian Lehrig
  */
-public final class TupleMeasurement extends Measurement {
+public final class TupleMeasurement extends MeasuringValue {
 
     /** Delegate to a measure provider holding the represented measure. */
     private final IMeasureProvider measureProvider;
 
     /** List of subsumed measurements. */
-    private final List<Measurement> subsumedMeasurements;
+    private final List<MeasuringValue> subsumedMeasurements;
 
     /**
      * Default constructor.
@@ -38,7 +38,7 @@ public final class TupleMeasurement extends Measurement {
      * @throws IllegalArgumentException
      *             If number of measures does not equal number of subsumed metrics.
      */
-    public TupleMeasurement(final List<Measurement> subsumedMeasurements,
+    public TupleMeasurement(final List<MeasuringValue> subsumedMeasurements,
             final MetricSetDescription metricSetDescription) {
         super(metricSetDescription);
 
@@ -96,9 +96,9 @@ public final class TupleMeasurement extends Measurement {
     @SuppressWarnings({
             "unchecked", "rawtypes"
     })
-    private static List<Measurement> computeSubsumedMeasurements(final MetricSetDescription metricDescription,
+    private static List<MeasuringValue> computeSubsumedMeasurements(final MetricSetDescription metricDescription,
             final List<Measure<?, ?>> measures) {
-        final List<Measurement> subsumedMeasurements = new ArrayList<Measurement>();
+        final List<MeasuringValue> subsumedMeasurements = new ArrayList<MeasuringValue>();
         int i = 0;
         for (final Measure<?, ?> measure : measures) {
             final MetricDescription subsumedMetric = metricDescription.getSubsumedMetrics().get(i++);
@@ -134,7 +134,7 @@ public final class TupleMeasurement extends Measurement {
      * 
      * @return the list of subsumed measurements.
      */
-    public List<Measurement> getSubsumedMeasurements() {
+    public List<MeasuringValue> getSubsumedMeasurements() {
         return Collections.unmodifiableList(this.subsumedMeasurements);
     }
 

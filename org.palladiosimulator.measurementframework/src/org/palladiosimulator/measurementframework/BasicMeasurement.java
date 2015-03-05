@@ -21,7 +21,7 @@ import org.palladiosimulator.metricspec.NumericalBaseMetricDescription;
  * 
  * @author Sebastian Lehrig
  */
-public final class BasicMeasurement<VALUE_TYPE, QUANTITY extends Quantity> extends Measurement {
+public final class BasicMeasurement<VALUE_TYPE, QUANTITY extends Quantity> extends MeasuringValue {
 
     /** The represented measure. */
     private final Measure<VALUE_TYPE, QUANTITY> measure;
@@ -111,7 +111,7 @@ public final class BasicMeasurement<VALUE_TYPE, QUANTITY extends Quantity> exten
         if (wantedMetric == null || !(wantedMetric instanceof BaseMetricDescription)) {
             throw new IllegalArgumentException("Only base metrics have measures attached.");
         }
-        final Measurement wantedMeasurement = getMeasurementForMetric(wantedMetric);
+        final MeasuringValue wantedMeasurement = getMeasuringValueForMetric(wantedMetric);
         if (wantedMeasurement == null || !(wantedMeasurement instanceof BasicMeasurement<?, ?>)) {
             throw new IllegalStateException("Measurement for a base metric is not an BasicMeasurement.");
         }
