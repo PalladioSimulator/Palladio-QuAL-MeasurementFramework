@@ -4,7 +4,6 @@
   <rm:property key="resolveFrom" value="release"/>
 
   <rm:locator pattern="^org\.palladiosimulator\.measurementframework.*" searchPathRef="measurementframework" failOnError="true"/>
-  <rm:locator pattern="^org\.palladiosimulator\.metricspec.*" searchPathRef="metricspec" failOnError="true"/>
 
   <rm:redirect pattern=".*" href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/MetricSpecification/trunk/org.palladiosimulator.metricspec.buckminster/metricspec.rmap"/>
   
