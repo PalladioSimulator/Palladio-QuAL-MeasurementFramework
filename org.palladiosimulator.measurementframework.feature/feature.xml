@@ -3,13 +3,14 @@
       id="org.palladiosimulator.measurementframework.feature"
       label="Measurement Framework"
       version="1.0.0.qualifier"
+      plugin="org.palladiosimulator.branding"
       license-feature="org.palladiosimulator.license"
       license-feature-version="1.0.0">
 
    <description url="http://palladiosimulator.org">
       Allows the definition of metrics for measurements.
    </description>
-   
+
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.jscience" version="4.1.3" match="greaterOrEqual"/>
@@ -19,6 +20,13 @@
 
    <plugin
          id="org.palladiosimulator.measurementframework"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.palladiosimulator.branding"
          download-size="0"
          install-size="0"
          version="0.0.0"
