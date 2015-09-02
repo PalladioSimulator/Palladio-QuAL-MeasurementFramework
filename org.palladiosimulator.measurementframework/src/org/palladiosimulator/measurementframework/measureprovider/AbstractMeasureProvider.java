@@ -35,7 +35,7 @@ public abstract class AbstractMeasureProvider implements IMeasureProvider {
         }
         final MeasuringValue wantedMeasurement = getMeasurementForMetric(wantedMetric);
         if (wantedMeasurement == null || !(wantedMeasurement instanceof BasicMeasurement<?, ?>)) {
-            throw new IllegalStateException("Measurement for a base metric is not an BasicMeasurement.");
+            throw new IllegalStateException("Measurement for a base metric is not a BasicMeasurement.");
         }
         final BasicMeasurement<V, Q> basicMeasurement = (BasicMeasurement<V, Q>) wantedMeasurement;
         return basicMeasurement.getMeasure();
