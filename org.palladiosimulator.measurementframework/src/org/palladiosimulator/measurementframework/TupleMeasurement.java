@@ -13,11 +13,12 @@ import org.palladiosimulator.measurementframework.measureprovider.MeasurementLis
 import org.palladiosimulator.metricspec.BaseMetricDescription;
 import org.palladiosimulator.metricspec.MetricDescription;
 import org.palladiosimulator.metricspec.MetricSetDescription;
+import org.palladiosimulator.metricspec.MetricSpecPackage;
 
 /**
  * Represents a tuple measurement, i.e., a measurement for a {@see MetricSetDescription}.
  * 
- * @author Sebastian Lehrig
+ * @author Sebastian Lehrig, Christian Stier
  */
 public final class TupleMeasurement extends MeasuringValue {
 
@@ -156,4 +157,27 @@ public final class TupleMeasurement extends MeasuringValue {
         return sb.toString();
     }
 
+    /**
+     * Returns this measuring value in case it conforms to the given metric description.
+     * 
+     * @param metricDesciption
+     *            the given metric description.
+     * @return this measuring value if it conforms to the given metric description,
+     *         <code>null</code> otherwise.
+     */
+    public MeasuringValue getMeasuringValueForMetric(final MetricDescription metricDesciption) {
+        if(MetricSpecPackage.eINSTANCE.getBaseMetricDescription().isInstance(metricDesciption)
+                && MetricSpecPackage.eINSTANCE.getMetricSetDescription()
+                    .isInstance(this.getMetricDesciption())) {
+            for(MeasuringValue curMeasurement : this.subsumedMeasurements) {
+                MeasuringValue value = curMeasurement.getMeasuringValueForMetric(metricDesciption);
+                if(value != null) {
+                    return value;
+                }
+            }
+        } else if (!metricDesciption.getId().equals(getMetricDesciption().getId())) {
+            return null;
+        }
+        return this;
+    }
 }
