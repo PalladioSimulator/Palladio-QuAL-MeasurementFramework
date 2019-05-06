@@ -16,17 +16,11 @@
       <import plugin="org.jscience" version="4.1.3" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.commons" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.metricspec" version="1.0.1" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.branding"/>
    </requires>
 
    <plugin
          id="org.palladiosimulator.measurementframework"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.palladiosimulator.branding"
          download-size="0"
          install-size="0"
          version="0.0.0"
