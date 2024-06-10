@@ -1,10 +1,9 @@
 # Palladio-QuAL-MeasurementFramework
-The framework is build around the core concept of a measurement, i.e., an entity
-that includes a metric description, the concrete measuring point of a metric, and
-a list of measures taken.
+The Palladio Quality Analysis Lab is a framework for taking and analysing measurments. Measurements can either originate from simulations or real measurements on running systems or prototypes. It offer fast, typed persistence of measurements, specification and implementation of measurement probes, and visualisation and analysis method.
 
 ## Documentation
-For comprehensive documentation, please visit our [wiki page](https://sdqweb.ipd.kit.edu/wiki/QuAL).
+For comprehensive documentation, please consult the [user manual](https://github.com/user-attachments/files/15522158/QualityAnalysisLab.pdf).
+
 
 ## Support
 For support
