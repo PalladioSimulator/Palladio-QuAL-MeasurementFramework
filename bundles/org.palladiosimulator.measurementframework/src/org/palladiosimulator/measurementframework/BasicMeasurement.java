@@ -3,8 +3,8 @@ package org.palladiosimulator.measurementframework;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.measure.Measure;
-import javax.measure.quantity.Quantity;
+import jakarta.measure.Measure;
+import jakarta.measure.quantity.Quantity;
 
 import org.palladiosimulator.metricspec.BaseMetricDescription;
 import org.palladiosimulator.metricspec.Identifier;

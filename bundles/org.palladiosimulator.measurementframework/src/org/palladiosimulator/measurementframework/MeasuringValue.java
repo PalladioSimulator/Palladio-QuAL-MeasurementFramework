@@ -2,7 +2,7 @@ package org.palladiosimulator.measurementframework;
 
 import java.util.List;
 
-import javax.measure.Measure;
+import jakarta.measure.Measure;
 
 import org.palladiosimulator.measurementframework.measureprovider.IMeasureProvider;
 import org.palladiosimulator.metricspec.MetricDescription;
