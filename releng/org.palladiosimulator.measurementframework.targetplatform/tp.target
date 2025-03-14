@@ -23,7 +23,7 @@
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
 <unit id="org.palladiosimulator.metricspec.feature.feature.group" version="1.0.3.201712071325"/>
-<repository location="https://updatesite.palladio-simulator.com/palladio-qual-metricspecification/nightly/"/>
+<repository location="https://updatesite.palladio-simulator.com/palladio-qual-metricspecification/branches/no_ui-edp2"/>
 </location>
 </locations>
 </target>
